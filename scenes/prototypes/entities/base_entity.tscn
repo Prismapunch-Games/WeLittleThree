@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://rw8akufak4ur"]
+
+[ext_resource type="Script" path="res://code/entity/entity.gd" id="1_mdjk4"]
+[ext_resource type="Texture2D" uid="uid://drqy35dvqx0rr" path="res://icon.svg" id="2_0d58r"]
+[ext_resource type="Texture2D" uid="uid://mb48khusj8yf" path="res://sprites/test/chevron.png" id="3_638a8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orb5q"]
+size = Vector2(64, 64)
+
+[node name="Base Entity" type="Node2D"]
+script = ExtResource("1_mdjk4")
+
+[node name="Main Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0d58r")
+
+[node name="Selected" type="Sprite2D" parent="."]
+position = Vector2(0, -48)
+texture = ExtResource("3_638a8")
+
+[node name="Click Catcher" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Click Catcher"]
+shape = SubResource("RectangleShape2D_orb5q")

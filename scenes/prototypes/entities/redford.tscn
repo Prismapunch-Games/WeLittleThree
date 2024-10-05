@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu1xfqvsghyfn"]
+
+[ext_resource type="PackedScene" uid="uid://rw8akufak4ur" path="res://scenes/prototypes/entities/base_entity.tscn" id="1_jjhys"]
+
+[node name="Redford" instance=ExtResource("1_jjhys")]
+
+[node name="Main Sprite" parent="." index="0"]
+self_modulate = Color(1, 0, 0, 1)
