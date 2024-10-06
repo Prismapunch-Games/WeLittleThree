@@ -1,10 +1,105 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfc84w3cwkhwi"]
+[gd_scene load_steps=10 format=3 uid="uid://cfc84w3cwkhwi"]
 
 [ext_resource type="PackedScene" uid="uid://rw8akufak4ur" path="res://scenes/prototypes/entities/base_entity.tscn" id="1_8huom"]
-[ext_resource type="Script" path="res://code/entity/controllable_entity.gd" id="2_blse8"]
+[ext_resource type="Texture2D" uid="uid://dwsipp5m5412i" path="res://sprites/yellow/front_walk_1.png" id="2_iria4"]
+[ext_resource type="Texture2D" uid="uid://b7np0is53gl2e" path="res://sprites/yellow/front_walk_2.png" id="3_qjswn"]
+[ext_resource type="Texture2D" uid="uid://bjl64s82e37kd" path="res://sprites/yellow/side_walk_1.png" id="4_cjicp"]
+[ext_resource type="Texture2D" uid="uid://crtyyx0tknrtw" path="res://sprites/yellow/side_walk_2.png" id="5_poj1y"]
+[ext_resource type="Texture2D" uid="uid://mwagans0ld4v" path="res://sprites/yellow/back_walk_1.png" id="6_phnw0"]
+[ext_resource type="Texture2D" uid="uid://dl6k6xgfjujof" path="res://sprites/yellow/back_walk_2.png" id="7_vffwv"]
+[ext_resource type="Texture2D" uid="uid://bsnl00pfvfxs7" path="res://sprites/yellow/left.png" id="7_xewlt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l0caf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iria4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qjswn")
+}],
+"loop": true,
+"name": &"down_idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iria4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qjswn")
+}],
+"loop": true,
+"name": &"down_move",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cjicp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_poj1y")
+}],
+"loop": true,
+"name": &"side_idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cjicp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_poj1y")
+}],
+"loop": true,
+"name": &"side_move",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iria4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cjicp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_phnw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xewlt")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_phnw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vffwv")
+}],
+"loop": true,
+"name": &"up_idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_phnw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vffwv")
+}],
+"loop": true,
+"name": &"up_move",
+"speed": 4.0
+}]
 
 [node name="Yeller" instance=ExtResource("1_8huom")]
-script = ExtResource("2_blse8")
+entity_flags = 3
 
-[node name="Main Sprite" parent="." index="0"]
-self_modulate = Color(1, 1, 0, 1)
+[node name="Main Sprite" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_l0caf")
+animation = &"spin"
+autoplay = "side_idle"
+frame_progress = 0.945593

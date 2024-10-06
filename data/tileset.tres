@@ -1,0 +1,38 @@
+[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://dludkg3ueiehq"]
+
+[ext_resource type="Texture2D" uid="uid://bio3pixyki3dd" path="res://sprites/test/tilemap.png" id="1_1wlt0"]
+[ext_resource type="PackedScene" uid="uid://bfdq5nhnr5hiv" path="res://scenes/prototypes/steppables/blue_button.tscn" id="2_awl58"]
+[ext_resource type="PackedScene" uid="uid://sh5hufhc7jmw" path="res://scenes/prototypes/steppables/leaver.tscn" id="3_51sx7"]
+[ext_resource type="PackedScene" uid="uid://dewvpa1vrdyf8" path="res://scenes/prototypes/steppables/red_button.tscn" id="4_uxbmn"]
+[ext_resource type="PackedScene" uid="uid://bwi7ckd8u66iw" path="res://scenes/prototypes/steppables/yellow_button.tscn" id="5_permc"]
+[ext_resource type="PackedScene" uid="uid://bu5p55bhimnc1" path="res://scenes/prototypes/entities/bloobo.tscn" id="6_0dr7e"]
+[ext_resource type="PackedScene" uid="uid://bu1xfqvsghyfn" path="res://scenes/prototypes/entities/redford.tscn" id="7_kqmbq"]
+[ext_resource type="PackedScene" uid="uid://cfc84w3cwkhwi" path="res://scenes/prototypes/entities/yeller.tscn" id="8_tjn45"]
+[ext_resource type="PackedScene" uid="uid://be0guw0pdiw8k" path="res://scenes/prototypes/entities/marble.tscn" id="9_yxavi"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhar6"]
+texture = ExtResource("1_1wlt0")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_maub8"]
+resource_name = "objects"
+scenes/1/scene = ExtResource("2_awl58")
+scenes/2/scene = ExtResource("3_51sx7")
+scenes/3/scene = ExtResource("4_uxbmn")
+scenes/4/scene = ExtResource("5_permc")
+scenes/5/scene = ExtResource("6_0dr7e")
+scenes/6/scene = ExtResource("7_kqmbq")
+scenes/7/scene = ExtResource("8_tjn45")
+scenes/8/scene = ExtResource("9_yxavi")
+
+[resource]
+tile_size = Vector2i(128, 128)
+custom_data_layer_0/name = "floor"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_nhar6")
+sources/1 = SubResource("TileSetScenesCollectionSource_maub8")

@@ -12,9 +12,7 @@ enum EntityFlags {
 var moving: bool = false
 var moving_to_position: Vector2
 
-var entity_flags: EntityFlags = EntityFlags.FLAG_NONE
-
-
+@export var entity_flags: EntityFlags = EntityFlags.FLAG_NONE
 
 func _setup():
 	return
@@ -24,8 +22,10 @@ func _ready() -> void:
 	Global.tilemap.add_node(self)
 
 func _can_move_in_direction(direction: Vector2):
-	var next_tile = position + direction * 64
+	var next_tile = position + direction * Global.tilemap.tile_set.tile_size.x
 	var cell_data = Global.tilemap.get_cell_tile_data(Global.tilemap.local_to_map(next_tile))
+	if(!cell_data):
+		return
 	if(!cell_data.get_custom_data("floor")):
 		return false
 	var hitting_object: Node2D = Global.tilemap.get_object_in_cell(next_tile)
@@ -39,7 +39,7 @@ func _can_move_in_direction(direction: Vector2):
 func _move(direction: Vector2):
 	if(!_can_move_in_direction(direction)):
 		return false
-	moving_to_position = position + direction * 64
+	moving_to_position = position + direction * Global.tilemap.tile_set.tile_size.x
 	moving = true
 	var tween = create_tween()
 	tween.tween_property(self, "position", moving_to_position, 0.35)
@@ -49,6 +49,13 @@ func _move(direction: Vector2):
 func _movement_complete():
 	moving = false
 	moving_to_position = Vector2.ZERO
+	var steppable: Steppable = Global.tilemap.get_steppable_in_cell(position)
+	if(steppable):
+		steppable.stepped_on(self)
 	
 func bump(bumper: Entity, direction: Vector2):
 	return false
+	
+func destroy():
+	Global.tilemap.remove_node(self)
+	queue_free()

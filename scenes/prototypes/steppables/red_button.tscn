@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dewvpa1vrdyf8"]
+
+[ext_resource type="PackedScene" uid="uid://bfdq5nhnr5hiv" path="res://scenes/prototypes/steppables/blue_button.tscn" id="1_8m86o"]
+[ext_resource type="Texture2D" uid="uid://bwlnkvgpqx4xp" path="res://sprites/items/button_red.png" id="2_bopjr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jjtvx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bopjr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bopjr")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}]
+
+[node name="Red Button" instance=ExtResource("1_8m86o")]
+button_color = 1
+
+[node name="Sprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_jjtvx")
+animation = &"default"

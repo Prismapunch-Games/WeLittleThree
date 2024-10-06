@@ -1,69 +1,45 @@
-[gd_scene load_steps=13 format=4 uid="uid://b470ihvuu7ns0"]
+[gd_scene load_steps=8 format=4 uid="uid://b470ihvuu7ns0"]
 
-[ext_resource type="Texture2D" uid="uid://bio3pixyki3dd" path="res://sprites/test/tilemap.png" id="1_1gh6x"]
 [ext_resource type="Script" path="res://code/level_controller.gd" id="1_dch3t"]
 [ext_resource type="Script" path="res://code/tilemap_base.gd" id="2_ag07r"]
 [ext_resource type="Script" path="res://code/cursor.gd" id="2_medxa"]
-[ext_resource type="PackedScene" uid="uid://bu1xfqvsghyfn" path="res://scenes/prototypes/entities/redford.tscn" id="3_j8o3e"]
-[ext_resource type="PackedScene" uid="uid://bu5p55bhimnc1" path="res://scenes/prototypes/entities/bloobo.tscn" id="4_r20th"]
+[ext_resource type="Texture2D" uid="uid://8fnlnt5lfyhe" path="res://sprites/background/grass_background.png" id="2_ywq75"]
+[ext_resource type="Texture2D" uid="uid://bqlnegsm3e7u2" path="res://sprites/background/box.png" id="3_ib63g"]
+[ext_resource type="TileSet" uid="uid://dludkg3ueiehq" path="res://data/tileset.tres" id="4_4h01j"]
 [ext_resource type="Texture2D" uid="uid://k3pjatmi6qbj" path="res://sprites/test/cursor.png" id="4_sjb67"]
-[ext_resource type="PackedScene" uid="uid://cfc84w3cwkhwi" path="res://scenes/prototypes/entities/yeller.tscn" id="5_kmpv2"]
-[ext_resource type="Script" path="res://code/marble.gd" id="9_q1xmo"]
-[ext_resource type="Texture2D" uid="uid://bvnc2h6t5trur" path="res://sprites/test/marble.png" id="10_478mh"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhar6"]
-texture = ExtResource("1_1gh6x")
-texture_region_size = Vector2i(64, 64)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-1:1/0/custom_data_0 = true
-2:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_t8l0j"]
-tile_size = Vector2i(64, 64)
-custom_data_layer_0/name = "floor"
-custom_data_layer_0/type = 1
-sources/0 = SubResource("TileSetAtlasSource_nhar6")
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_dch3t")
 metadata/_edit_lock_ = true
 
+[node name="Grass" type="Sprite2D" parent="."]
+z_index = -100
+texture = ExtResource("2_ywq75")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Box" type="Sprite2D" parent="."]
+z_index = -100
+texture = ExtResource("3_ib63g")
+centered = false
+metadata/_edit_lock_ = true
+
 [node name="Base" type="TileMapLayer" parent="."]
-position = Vector2(-32, 0)
-tile_map_data = PackedByteArray("AAAFAAMAAAAAAAEAAAAFAAIAAAAAAAAAAAAGAAIAAAABAAAAAAAHAAIAAAABAAAAAAAFAAQAAAAAAAEAAAAIAAIAAAABAAAAAAAJAAIAAAABAAAAAAAKAAIAAAABAAAAAAALAAIAAAABAAAAAAAMAAIAAAABAAAAAAANAAIAAAABAAAAAAAOAAIAAAABAAAAAAAPAAIAAAACAAAAAAAFAAgAAAAAAAIAAAAGAAgAAAABAAIAAAAHAAgAAAABAAIAAAAIAAgAAAABAAIAAAAJAAgAAAABAAIAAAAKAAgAAAABAAIAAAALAAgAAAABAAIAAAAMAAgAAAABAAIAAAANAAgAAAABAAIAAAAOAAgAAAABAAIAAAAPAAgAAAACAAIAAAAFAAUAAAAAAAEAAAAFAAYAAAAAAAEAAAAFAAcAAAAAAAEAAAAPAAcAAAACAAEAAAAPAAYAAAACAAEAAAAPAAUAAAACAAEAAAAPAAQAAAACAAEAAAAPAAMAAAACAAEAAAAKAAUAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAEAAAAGAAUAAAABAAEAAAAGAAYAAAABAAEAAAAGAAcAAAABAAEAAAAHAAMAAAABAAEAAAAHAAQAAAABAAEAAAAHAAUAAAABAAEAAAAHAAYAAAABAAEAAAAHAAcAAAABAAEAAAAIAAMAAAABAAEAAAAIAAQAAAABAAEAAAAIAAUAAAABAAEAAAAIAAYAAAABAAEAAAAIAAcAAAABAAEAAAAJAAMAAAABAAEAAAAJAAQAAAABAAEAAAAJAAUAAAABAAEAAAAJAAYAAAABAAEAAAAJAAcAAAABAAEAAAAKAAMAAAABAAEAAAAKAAQAAAABAAEAAAAKAAYAAAABAAEAAAAKAAcAAAABAAEAAAALAAMAAAABAAEAAAALAAQAAAABAAEAAAALAAUAAAABAAEAAAALAAYAAAABAAEAAAALAAcAAAABAAEAAAAMAAMAAAABAAEAAAAMAAQAAAABAAEAAAAMAAUAAAABAAEAAAAMAAYAAAABAAEAAAAMAAcAAAABAAEAAAANAAMAAAABAAEAAAANAAQAAAABAAEAAAANAAUAAAABAAEAAAANAAYAAAABAAEAAAANAAcAAAABAAEAAAAOAAMAAAABAAEAAAAOAAQAAAABAAEAAAAOAAUAAAABAAEAAAAOAAYAAAABAAEAAAAOAAcAAAABAAEAAAA=")
-tile_set = SubResource("TileSet_t8l0j")
+self_modulate = Color(1, 1, 1, 0.501961)
+position = Vector2(0, 32)
+tile_map_data = PackedByteArray("AAAKAAUAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAIAAAAAAAAAAAA=")
+tile_set = ExtResource("4_4h01j")
 script = ExtResource("2_ag07r")
 metadata/_edit_lock_ = true
 
-[node name="Redford" parent="." instance=ExtResource("3_j8o3e")]
-position = Vector2(704, 352)
-metadata/_edit_lock_ = true
-
-[node name="Bloobo" parent="." instance=ExtResource("4_r20th")]
-position = Vector2(512, 416)
-metadata/_edit_lock_ = true
-
-[node name="Yeller" parent="." instance=ExtResource("5_kmpv2")]
-position = Vector2(576, 288)
-metadata/_edit_lock_ = true
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(0, 32)
+tile_map_data = PackedByteArray("AAAJAAUAAQAAAAAAAQAFAAYAAQAAAAAAAgAGAAUAAQAAAAAAAwALAAYAAQAAAAAABAAFAAMAAQAAAAAABQAHAAMAAQAAAAAABgAJAAMAAQAAAAAABwAEAAQAAQAAAAAACAA=")
+tile_set = ExtResource("4_4h01j")
 
 [node name="Cursor" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("4_sjb67")
 script = ExtResource("2_medxa")
-metadata/_edit_lock_ = true
-
-[node name="Marble" type="Node2D" parent="."]
-position = Vector2(640, 416)
-script = ExtResource("9_q1xmo")
-metadata/_edit_lock_ = true
-
-[node name="Sprite" type="Sprite2D" parent="Marble"]
-texture = ExtResource("10_478mh")
 metadata/_edit_lock_ = true

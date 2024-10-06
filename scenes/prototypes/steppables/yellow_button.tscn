@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwi7ckd8u66iw"]
+
+[ext_resource type="PackedScene" uid="uid://bfdq5nhnr5hiv" path="res://scenes/prototypes/steppables/blue_button.tscn" id="1_b51yg"]
+[ext_resource type="Texture2D" uid="uid://coiq3mm2i3r5b" path="res://sprites/items/button_yellow.png" id="2_h0ftb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_onryx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h0ftb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_h0ftb")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}]
+
+[node name="Yellow Button" instance=ExtResource("1_b51yg")]
+button_color = 3
+
+[node name="Sprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_onryx")
+animation = &"default"
