@@ -1,51 +1,54 @@
 extends Node2D
-
 class_name Entity
 
-var hovered: bool = false
-var move_direction: Vector2 = Vector2.ZERO
+enum EntityFlags {
+	FLAG_NONE,
+	FLAG_RED,
+	FLAG_BLUE,
+	FLAG_YELLOW
+}
 
-@onready var selected_sprite: Sprite2D = $Selected
-@onready var click_catcher: Area2D = $"Click Catcher"
+
+var moving: bool = false
+var moving_to_position: Vector2
+
+var entity_flags: EntityFlags = EntityFlags.FLAG_NONE
+
+
+
+func _setup():
+	return
 
 func _ready() -> void:
-	selected_sprite.hide()
-	
-	click_catcher.mouse_entered.connect(Callable(self, "_mouse_entered"))
-	click_catcher.mouse_exited.connect(Callable(self, "_mouse_exited"))
-	
-func _mouse_entered() -> void:
-	hovered = true
-	
-func _mouse_exited() -> void:
-	hovered = false
+	_setup()
+	Global.tilemap.add_node(self)
 
-func _input(event: InputEvent) -> void:
-	if(!hovered):
-		return
-	if(event is InputEventMouseButton and event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT):
-		select()
-		
-func select():
-	if(Global.selected_entity):
-		Global.selected_entity.deselect()
-	Global.selected_entity = self
-	selected_sprite.show()
+func _can_move_in_direction(direction: Vector2):
+	var next_tile = position + direction * 64
+	var cell_data = Global.tilemap.get_cell_tile_data(Global.tilemap.local_to_map(next_tile))
+	if(!cell_data.get_custom_data("floor")):
+		return false
+	var hitting_object: Node2D = Global.tilemap.get_object_in_cell(next_tile)
+	if(hitting_object):
+		if(hitting_object is Entity):
+			var moved: bool = hitting_object.bump(self, direction)
+			return moved
+		return false
+	return true
+
+func _move(direction: Vector2):
+	if(!_can_move_in_direction(direction)):
+		return false
+	moving_to_position = position + direction * 64
+	moving = true
+	var tween = create_tween()
+	tween.tween_property(self, "position", moving_to_position, 0.35)
+	tween.tween_callback(Callable(self, "_movement_complete"))
+	return true
+
+func _movement_complete():
+	moving = false
+	moving_to_position = Vector2.ZERO
 	
-func deselect():
-	selected_sprite.hide()
-	
-func _process(delta: float) -> void:
-	if(Global.selected_entity != self):
-		return
-	if(!move_direction.length()):
-		var mv: Vector2 = Vector2(Input.get_action_raw_strength("right") - Input.get_action_raw_strength("left"), Input.get_action_raw_strength("down") - Input.get_action_raw_strength("up"))
-		if(mv.length()):
-			move_direction = mv
-		if(move_direction.length()):
-			var tween = create_tween()
-			tween.tween_property(self, "position", position + move_direction * 64, 0.35)
-			tween.tween_callback(func():
-				move_direction = Vector2.ZERO
-				)
-	position += move_direction * delta * 64
+func bump(bumper: Entity, direction: Vector2):
+	return false

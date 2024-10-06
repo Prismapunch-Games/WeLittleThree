@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfc84w3cwkhwi"]
+[gd_scene load_steps=3 format=3 uid="uid://cfc84w3cwkhwi"]
 
 [ext_resource type="PackedScene" uid="uid://rw8akufak4ur" path="res://scenes/prototypes/entities/base_entity.tscn" id="1_8huom"]
+[ext_resource type="Script" path="res://code/entity/controllable_entity.gd" id="2_blse8"]
 
 [node name="Yeller" instance=ExtResource("1_8huom")]
+script = ExtResource("2_blse8")
 
 [node name="Main Sprite" parent="." index="0"]
 self_modulate = Color(1, 1, 0, 1)

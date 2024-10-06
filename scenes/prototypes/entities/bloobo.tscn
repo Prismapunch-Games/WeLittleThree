@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu5p55bhimnc1"]
+[gd_scene load_steps=3 format=3 uid="uid://bu5p55bhimnc1"]
 
 [ext_resource type="PackedScene" uid="uid://rw8akufak4ur" path="res://scenes/prototypes/entities/base_entity.tscn" id="1_ota7g"]
+[ext_resource type="Script" path="res://code/entity/controllable_entity.gd" id="2_7uf0s"]
 
 [node name="Bloobo" instance=ExtResource("1_ota7g")]
+script = ExtResource("2_7uf0s")
 
 [node name="Main Sprite" parent="." index="0"]
 self_modulate = Color(0, 0, 1, 1)

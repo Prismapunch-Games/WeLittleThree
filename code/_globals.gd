@@ -1,4 +1,4 @@
 extends Node
 
-var tilemap: TileMapLayer
+var tilemap: TilemapObject
 var selected_entity: Entity
