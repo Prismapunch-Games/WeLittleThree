@@ -29,6 +29,10 @@ window/size/resizable=false
 
 enabled=PackedStringArray("res://addons/wakatime/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 left={
