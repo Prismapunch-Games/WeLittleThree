@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b470ihvuu7ns0"]
+[gd_scene load_steps=32 format=3 uid="uid://b470ihvuu7ns0"]
 
 [ext_resource type="Script" path="res://code/cursor.gd" id="2_medxa"]
 [ext_resource type="Texture2D" uid="uid://8fnlnt5lfyhe" path="res://sprites/background/grass_background.png" id="2_ywq75"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://k3pjatmi6qbj" path="res://sprites/test/cursor.png" id="4_sjb67"]
 [ext_resource type="PackedScene" uid="uid://rmrbytmrkj7c" path="res://scenes/main_menu.tscn" id="7_xai7q"]
 [ext_resource type="Texture2D" uid="uid://4fuhpp24lol1" path="res://sprites/background/grid.png" id="8_ihfs1"]
+[ext_resource type="Texture2D" uid="uid://deil5ex4os5p6" path="res://sprites/UI/backarrow.png" id="8_rl4ip"]
 [ext_resource type="Theme" uid="uid://dpa2m684e5spd" path="res://data/main_theme.tres" id="8_suits"]
+[ext_resource type="Texture2D" uid="uid://d2d8mhtrbjwf4" path="res://sprites/UI/restart.png" id="9_ateow"]
 [ext_resource type="Texture2D" uid="uid://bmq26p2li40fy" path="res://sprites/blue/dance_1.png" id="9_cie2n"]
 [ext_resource type="Shader" path="res://data/circle_fade.gdshader" id="9_d42q4"]
 [ext_resource type="Script" path="res://code/win_screen.gd" id="9_scuqy"]
@@ -20,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://se04uvrurmhb" path="res://sprites/yellow/dance_1.png" id="16_6b1a2"]
 [ext_resource type="Texture2D" uid="uid://b1l4b28kn1sn4" path="res://sprites/yellow/dance_2.png" id="17_lxnlj"]
 [ext_resource type="Texture2D" uid="uid://cyahl1l868slh" path="res://sprites/yellow/dance_3.png" id="18_yaob0"]
+[ext_resource type="Script" path="res://code/intro_screen.gd" id="20_x6ygs"]
+[ext_resource type="Texture2D" uid="uid://ceuhxsys5a05s" path="res://sprites/tutorial.png" id="21_c8irn"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_1lhkh"]
 frames = 4
@@ -125,6 +129,7 @@ metadata/_edit_lock_ = true
 script = ExtResource("9_wqse7")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
+texture_filter = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -143,6 +148,34 @@ offset_right = 307.0
 offset_bottom = 115.0
 rotation = -0.0872665
 text = "Level Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -112.0
+offset_right = 212.0
+offset_bottom = -16.0
+grow_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="Pause" type="TextureButton" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("8_rl4ip")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Restart" type="TextureButton" parent="CanvasLayer/Control/HBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("9_ateow")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="Main Menu" parent="CanvasLayer" instance=ExtResource("7_xai7q")]
 visible = false
@@ -254,6 +287,55 @@ layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 texture = ExtResource("13_0m4y1")
+
+[node name="Intro Screen" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("20_x6ygs")
+
+[node name="Box" type="TextureRect" parent="CanvasLayer/Intro Screen"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_ib63g")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Intro Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="Control" type="Control" parent="CanvasLayer/Intro Screen/MarginContainer"]
+layout_mode = 2
+
+[node name="Tutorial Sprite" type="TextureRect" parent="CanvasLayer/Intro Screen/MarginContainer/Control"]
+texture_filter = 4
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -584.5
+offset_top = -339.0
+offset_right = 584.5
+offset_bottom = 339.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("21_c8irn")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_srjvf")

@@ -32,11 +32,8 @@ func load_next_level():
 	if(loading_next_level):
 		return
 	loading_next_level = true
-	selected_entity = null
-	tilemap = null
-	leaver = null
-	current_level.queue_free()
-	current_level = null
+	if(current_level):
+		unload_level()
 	current_level_index += 1
 	if(current_level_index < levels.size()):
 		load_level(current_level_index)
@@ -93,9 +90,32 @@ func restart_game():
 	ui_controller.win_screen.mouse_filter = Control.MOUSE_FILTER_STOP
 	ui_controller.fade_animation.play_backwards("fade_in")
 	await ui_controller.fade_animation.animation_finished
+	if(current_level):
+		unload_level()
 	ui_controller.win_screen.hide()
 	ui_controller.main_menu.mouse_filter = Control.MOUSE_FILTER_STOP
 	ui_controller.main_menu.show()
 	ui_controller.fade_animation.play("fade_in")
 	doing_something_important = false
 	
+func restart_level():
+	doing_something_important = true
+	ui_controller.fade_animation.play_backwards("fade_in")
+	await ui_controller.fade_animation.animation_finished
+	if(current_level):
+		unload_level()
+	load_level(current_level_index)
+	ui_controller.fade_animation.play("fade_in")
+	doing_something_important = false
+	
+func go_to_main_menu():
+	restart_game()
+	return
+	
+func unload_level():
+	selected_entity = null
+	tilemap = null
+	leaver = null
+	top_level_node.remove_child(current_level)
+	current_level.queue_free()
+	current_level = null
