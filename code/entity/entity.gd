@@ -53,7 +53,7 @@ func _movement_complete():
 	if(steppable):
 		steppable.stepped_on(self)
 	
-func bump(bumper: Entity, direction: Vector2):
+func bump(_bumper: Entity, _direction: Vector2):
 	return false
 	
 func destroy():

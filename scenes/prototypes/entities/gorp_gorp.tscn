@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://c8egmpv0gd71q"]
+
+[ext_resource type="Script" path="res://code/entity/gorp_gorp.gd" id="1_u8pg8"]
+[ext_resource type="Texture2D" uid="uid://cci5bsjpxikn2" path="res://sprites/purple/zorp_death_1.png" id="2_seitj"]
+[ext_resource type="Texture2D" uid="uid://do1ajv870is3q" path="res://sprites/purple/zorp_death_2.png" id="3_2iwdl"]
+[ext_resource type="Texture2D" uid="uid://b7b2vsxksb37x" path="res://sprites/purple/zorp_1.png" id="4_vywyx"]
+[ext_resource type="Texture2D" uid="uid://ccv0cbphkbag6" path="res://sprites/purple/zorp_2.png" id="5_2rhxr"]
+[ext_resource type="Texture2D" uid="uid://lasmii15hwr6" path="res://sprites/purple/zorp_3.png" id="6_kjw33"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mw8vc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_seitj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2iwdl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_seitj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2iwdl")
+}],
+"loop": false,
+"name": &"death",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vywyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2rhxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kjw33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2rhxr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="Gorp Gorp" type="Node2D"]
+script = ExtResource("1_u8pg8")
+
+[node name="Main Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+scale = Vector2(0.125, 0.125)
+sprite_frames = SubResource("SpriteFrames_mw8vc")
+animation = &"death"
+autoplay = "default"
+frame = 3
+frame_progress = 1.0

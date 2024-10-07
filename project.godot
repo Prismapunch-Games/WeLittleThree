@@ -24,9 +24,7 @@ Global="*res://code/_globals.gd"
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/resizable=false
-window/size/window_width_override=1280
-window/size/window_height_override=720
-window/stretch/mode="viewport"
+window/size/borderless=true
 
 [editor_plugins]
 
@@ -35,6 +33,10 @@ enabled=PackedStringArray("res://addons/wakatime/plugin.cfg")
 [filesystem]
 
 import/blender/enabled=false
+
+[gui]
+
+theme/custom_font="res://fonts/BadComic-Regular.ttf"
 
 [importer_defaults]
 
