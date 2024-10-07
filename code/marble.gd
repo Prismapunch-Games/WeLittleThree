@@ -1,7 +1,7 @@
 extends Entity
 class_name Marble
 
-@onready var sprite: Sprite2D = $Sprite
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 func _ready() -> void:
 	Global.tilemap.add_node(self)
@@ -15,11 +15,20 @@ func bump(bumper: Entity, direction: Vector2):
 func _move(direction: Vector2):
 	var success: bool = super(direction)
 	if(success):
-		var tween = create_tween()
-		var rotation_direction = 360
-		if(sign(direction.x) == -1):
-			rotation_direction = -360
-		tween.tween_property(self, "rotation", deg_to_rad(rotation_direction), 0.30)
+		var play_backwards: bool = false
+		var rotation_direction: String = "side"
+		match(direction):
+			Vector2.UP:
+				rotation_direction = "vertical"
+			Vector2.DOWN:
+				rotation_direction = "vertical"
+				play_backwards = true
+			Vector2.LEFT:
+				play_backwards = true
+		if(play_backwards):
+			sprite.play_backwards(rotation_direction)
+		else:
+			sprite.play(rotation_direction)
 	return success
 	
 func _movement_complete():

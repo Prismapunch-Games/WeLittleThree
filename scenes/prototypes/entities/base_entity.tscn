@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://rw8akufak4ur"]
 
 [ext_resource type="Script" path="res://code/entity/controllable_entity.gd" id="1_5cxa4"]
-[ext_resource type="Texture2D" uid="uid://mvquusmiaq8d" path="res://sprites/test/shadow.png" id="3_1xfq5"]
+[ext_resource type="Texture2D" uid="uid://sua300ooi5v2" path="res://sprites/items/marble/marble_shadow.png" id="2_833vn"]
 [ext_resource type="Texture2D" uid="uid://mb48khusj8yf" path="res://sprites/test/chevron.png" id="3_638a8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orb5q"]
@@ -11,11 +11,8 @@ size = Vector2(128, 128)
 script = ExtResource("1_5cxa4")
 
 [node name="Shadow" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.498039)
 z_index = -1
-position = Vector2(0, 50)
-scale = Vector2(0.66, 0.25)
-texture = ExtResource("3_1xfq5")
+texture = ExtResource("2_833vn")
 
 [node name="Main Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 3

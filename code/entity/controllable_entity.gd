@@ -11,6 +11,8 @@ var hovered: bool = false
 var last_direction: Vector2
 
 var destroying: bool = false
+var pushing: bool = false
+var jumping: bool = false
 
 func _ready() -> void:
 	super()
@@ -47,12 +49,15 @@ func _process(_delta: float) -> void:
 	if(destroying):
 		return
 	_process_movement()
+	_set_sprite()
 	
-func _process_movement(override_moving: bool = false):
+func _process_movement():
+	if(moving):
+		return
 	var direction: Vector2 = Vector2(Input.get_action_raw_strength("right") - Input.get_action_raw_strength("left"), Input.get_action_raw_strength("down") - Input.get_action_raw_strength("up"))
 	if(direction.x && direction.y):
 		direction = Vector2(direction.x, 0)
-	if(direction.length() && (override_moving || !moving)):
+	if(direction.length()):
 		_move(direction)
 		return true
 	return false
@@ -64,6 +69,8 @@ func _move(direction: Vector2):
 	# we're pushing it
 	if(!(pushing_object is Entity)): 
 		pushing_object = null
+	if(pushing_object):
+		pushing = true
 		
 	if(!super(direction)):
 		if(entity_flags == EntityFlags.FLAG_YELLOW && _can_jump(direction)):
@@ -71,64 +78,101 @@ func _move(direction: Vector2):
 		return
 	last_direction = direction
 	sprite.offset = Vector2.ZERO
-	match(direction):
-		Vector2.UP:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			if(pushing_object):
-				sprite.animation = "up_push"
-				sprite.offset.y = -256-64-16
-			else:
-				sprite.animation = "up_move"
-				sprite.offset.y = 0
-		Vector2.DOWN:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			if(pushing_object):
-				sprite.animation = "down_push"
-				sprite.offset.y = 256+64+16
-			else:
-				sprite.animation = "down_move"
-				sprite.offset.y = 0
-		Vector2.LEFT:
-			sprite.scale.x = sprite.scale.x * -sign(sprite.scale.x)
-			if(pushing_object):
-				sprite.animation = "side_push"
-				sprite.offset.x = 256+64+16
-			else:
-				sprite.animation = "side_move"
-				sprite.offset.x = 0
-		Vector2.RIGHT:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			if(pushing_object):
-				sprite.animation = "side_push"
-				sprite.offset.x = 256+64+16
-			else:
-				sprite.animation = "side_move"
-				sprite.offset.x = 0
+	shadow.offset = Vector2.ZERO
 			
 func _movement_complete():
 	super()
 	if(destroying):
 		return
-	print("%s movement complete" % name)
-	if(_process_movement(true)):
-		return
-	match(last_direction):
-		Vector2.UP:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			sprite.animation = "up_idle"
-			sprite.offset = Vector2.ZERO
-		Vector2.DOWN:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			sprite.animation = "down_idle"
-			sprite.offset = Vector2.ZERO
-		Vector2.LEFT:
-			sprite.scale.x = sprite.scale.x * -sign(sprite.scale.x)
-			sprite.animation = "side_idle"
-			sprite.offset = Vector2.ZERO
-		Vector2.RIGHT:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			sprite.animation = "side_idle"
-			sprite.offset = Vector2.ZERO
+	pushing = false
+	jumping = false
+			
+func _set_sprite():
+	if(moving && !jumping):
+		sprite.offset = Vector2.ZERO
+		shadow.offset = Vector2.ZERO
+		match(last_direction):
+			Vector2.UP:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				if(pushing):
+					sprite.animation = "up_push"
+					sprite.offset.y = -256-64-16
+					shadow.offset.y = sprite.offset.y / 8
+					
+				else:
+					sprite.animation = "up_move"
+					sprite.offset.y = 0
+					shadow.offset.y = sprite.offset.y
+			Vector2.DOWN:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				if(pushing):
+					sprite.animation = "down_push"
+					sprite.offset.y = 256+64+16
+					shadow.offset.y = sprite.offset.y / 8
+				else:
+					sprite.animation = "down_move"
+					sprite.offset.y = 0
+					shadow.offset.y = sprite.offset.y
+			Vector2.LEFT:
+				sprite.scale.x = sprite.scale.x * -sign(sprite.scale.x)
+				if(pushing):
+					sprite.animation = "side_push"
+					sprite.offset.x = 256+64+16
+					shadow.offset.x = sprite.offset.x / 8
+				else:
+					sprite.animation = "side_move"
+					sprite.offset.x = 0
+					shadow.offset.x = sprite.offset.x
+			Vector2.RIGHT:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				if(pushing):
+					sprite.animation = "side_push"
+					sprite.offset.x = 256+64+16
+					shadow.offset.x = sprite.offset.x / 8
+				else:
+					sprite.animation = "side_move"
+					sprite.offset.x = 0
+					shadow.offset.x = sprite.offset.x / 8
+	elif(jumping):
+		match(last_direction):
+			Vector2.UP:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				sprite.animation = "up_jump"
+				sprite.offset = Vector2.ZERO
+			Vector2.DOWN:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				sprite.animation = "down_jump"
+				sprite.offset = Vector2.ZERO
+			Vector2.LEFT:
+				sprite.scale.x = sprite.scale.x * -sign(sprite.scale.x)
+				sprite.animation = "side_jump"
+				sprite.offset = Vector2.ZERO
+			Vector2.RIGHT:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				sprite.animation = "side_jump"
+				sprite.offset = Vector2.ZERO
+	else:
+		match(last_direction):
+			Vector2.UP:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				sprite.animation = "up_idle"
+				sprite.offset = Vector2.ZERO
+				shadow.offset = Vector2.ZERO
+			Vector2.DOWN:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				sprite.animation = "down_idle"
+				sprite.offset = Vector2.ZERO
+				shadow.offset = Vector2.ZERO
+			Vector2.LEFT:
+				sprite.scale.x = sprite.scale.x * -sign(sprite.scale.x)
+				sprite.animation = "side_idle"
+				sprite.offset = Vector2.ZERO
+				shadow.offset = Vector2.ZERO
+			Vector2.RIGHT:
+				sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+				sprite.animation = "side_idle"
+				sprite.offset = Vector2.ZERO
+				shadow.offset = Vector2.ZERO
 
 func destroy():
 	print("destroying")
@@ -170,23 +214,7 @@ func _jump(direction: Vector2):
 	moving_to_position = position + direction * (Global.tilemap.tile_set.tile_size.x * 2)
 	moving = true
 	last_direction = direction
-	match(last_direction):
-		Vector2.UP:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			sprite.animation = "up_jump"
-			sprite.offset = Vector2.ZERO
-		Vector2.DOWN:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			sprite.animation = "down_jump"
-			sprite.offset = Vector2.ZERO
-		Vector2.LEFT:
-			sprite.scale.x = sprite.scale.x * -sign(sprite.scale.x)
-			sprite.animation = "side_jump"
-			sprite.offset = Vector2.ZERO
-		Vector2.RIGHT:
-			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
-			sprite.animation = "side_jump"
-			sprite.offset = Vector2.ZERO
+	jumping = true
 	await get_tree().create_timer(0.5).timeout
 	var tween = create_tween()
 	tween.set_parallel()
@@ -195,5 +223,5 @@ func _jump(direction: Vector2):
 	tween.tween_property(sprite, "offset", Vector2(0, -512), 0.35 * 0.5)
 	tween.chain().tween_property(sprite, "offset", Vector2.ZERO, 0.35 * 0.5)
 	tween.tween_property(self, "position", moving_to_position, 0.35 * 0.5)
-	
+	await tween.finished
 	return true

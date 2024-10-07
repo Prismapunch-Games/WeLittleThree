@@ -11,5 +11,5 @@ func stepped_on(entity: Entity):
 		return
 	if(button_color == entity.entity_flags):
 		pressed = true
-		sprite.modulate = Color(0.6,0.6,0.6)
+		sprite.play("down")
 	Global.check_for_completion()

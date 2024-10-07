@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://code/ui_controller.gd" id="9_wqse7"]
 [ext_resource type="Texture2D" uid="uid://j3ofw0envl06" path="res://sprites/blue/dance_2.png" id="10_mh88a"]
 [ext_resource type="Texture2D" uid="uid://cicjxyap7jpus" path="res://sprites/blue/dance_3.png" id="11_03fg6"]
-[ext_resource type="Texture2D" uid="uid://mvquusmiaq8d" path="res://sprites/test/shadow.png" id="12_0unqq"]
+[ext_resource type="Texture2D" uid="uid://sua300ooi5v2" path="res://sprites/items/marble/marble_shadow.png" id="13_0m4y1"]
 [ext_resource type="Texture2D" uid="uid://b6powdntschy2" path="res://sprites/red/dance_1.png" id="13_1gi3l"]
 [ext_resource type="Texture2D" uid="uid://brhk7frgbk03s" path="res://sprites/red/dance_2.png" id="14_uns1u"]
 [ext_resource type="Texture2D" uid="uid://cxm13sa64f5yq" path="res://sprites/red/dance_3.png" id="15_bo1if"]
@@ -215,15 +215,11 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Shadow" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control/Blue"]
-modulate = Color(1, 1, 1, 0.498039)
 show_behind_parent = true
 layout_mode = 0
-offset_left = 22.0
-offset_top = 90.0
-offset_right = 150.0
-offset_bottom = 218.0
-scale = Vector2(0.66, 0.25)
-texture = ExtResource("12_0unqq")
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("13_0m4y1")
 
 [node name="Red" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control"]
 layout_mode = 0
@@ -236,15 +232,11 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Shadow" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control/Red"]
-modulate = Color(1, 1, 1, 0.498039)
 show_behind_parent = true
 layout_mode = 0
-offset_left = 22.0
-offset_top = 90.0
-offset_right = 150.0
-offset_bottom = 218.0
-scale = Vector2(0.66, 0.25)
-texture = ExtResource("12_0unqq")
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("13_0m4y1")
 
 [node name="Yellow" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control"]
 layout_mode = 0
@@ -257,15 +249,11 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Shadow" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control/Yellow"]
-modulate = Color(1, 1, 1, 0.498039)
 show_behind_parent = true
 layout_mode = 0
-offset_left = 22.0
-offset_top = 90.0
-offset_right = 150.0
-offset_bottom = 218.0
-scale = Vector2(0.66, 0.25)
-texture = ExtResource("12_0unqq")
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("13_0m4y1")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_srjvf")
