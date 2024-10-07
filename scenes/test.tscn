@@ -1,31 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://b470ihvuu7ns0"]
+[gd_scene load_steps=13 format=3 uid="uid://b470ihvuu7ns0"]
 
 [ext_resource type="Script" path="res://code/cursor.gd" id="2_medxa"]
 [ext_resource type="Texture2D" uid="uid://8fnlnt5lfyhe" path="res://sprites/background/grass_background.png" id="2_ywq75"]
 [ext_resource type="Texture2D" uid="uid://bqlnegsm3e7u2" path="res://sprites/background/box.png" id="3_ib63g"]
 [ext_resource type="Texture2D" uid="uid://k3pjatmi6qbj" path="res://sprites/test/cursor.png" id="4_sjb67"]
-[ext_resource type="Theme" uid="uid://dpa2m684e5spd" path="res://data/main_theme.tres" id="8_suits"]
+[ext_resource type="Texture2D" uid="uid://4fuhpp24lol1" path="res://sprites/background/grid.png" id="8_ihfs1"]
+[ext_resource type="Theme" path="res://data/main_theme.tres" id="8_suits"]
 [ext_resource type="Shader" path="res://data/circle_fade.gdshader" id="9_d42q4"]
 [ext_resource type="Script" path="res://code/ui_controller.gd" id="9_wqse7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_srjvf"]
 shader = ExtResource("9_d42q4")
 shader_parameter/circle_size = 1.0
-
-[sub_resource type="Animation" id="Animation_mw5bq"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
 
 [sub_resource type="Animation" id="Animation_2drqi"]
 length = 0.001
@@ -40,6 +26,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_mw5bq"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tqel0"]
@@ -85,6 +86,7 @@ theme = ExtResource("8_suits")
 metadata/_edit_lock_ = true
 
 [node name="Level Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
 offset_left = 18.0
 offset_top = 37.0
 offset_right = 307.0
@@ -107,3 +109,7 @@ libraries = {
 "": SubResource("AnimationLibrary_tqel0")
 }
 autoplay = "fade_in"
+
+[node name="Grid" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(963, 536)
+texture = ExtResource("8_ihfs1")
