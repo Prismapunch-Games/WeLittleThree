@@ -41,13 +41,11 @@ func select():
 func deselect():
 	selected_sprite.hide()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(Global.selected_entity != self):
 		return
 	if(destroying):
 		return
-	if(Input.is_key_pressed(KEY_G)):
-		destroy()
 	_process_movement()
 	
 func _process_movement(override_moving: bool = false):
@@ -68,6 +66,8 @@ func _move(direction: Vector2):
 		pushing_object = null
 		
 	if(!super(direction)):
+		if(entity_flags == EntityFlags.FLAG_YELLOW && _can_jump(direction)):
+			_jump(direction)
 		return
 	last_direction = direction
 	sprite.offset = Vector2.ZERO
@@ -109,6 +109,7 @@ func _movement_complete():
 	super()
 	if(destroying):
 		return
+	print("%s movement complete" % name)
 	if(_process_movement(true)):
 		return
 	match(last_direction):
@@ -130,6 +131,7 @@ func _movement_complete():
 			sprite.offset = Vector2.ZERO
 
 func destroy():
+	print("destroying")
 	if(destroying):
 		return
 	destroying = true
@@ -148,3 +150,50 @@ func destroy():
 		shadow.queue_free()
 		queue_free()
 		)
+		
+func _can_jump(direction: Vector2):
+	var next_tile = position + direction * (Global.tilemap.tile_set.tile_size.x * 2)
+	var cell_data = Global.tilemap.get_cell_tile_data(Global.tilemap.local_to_map(next_tile))
+	if(!cell_data):
+		return
+	if(!cell_data.get_custom_data("floor")):
+		return false
+	var hitting_object: Node2D = Global.tilemap.get_object_in_cell(next_tile)
+	if(hitting_object):
+		if(hitting_object is Entity):
+			var moved: bool = hitting_object.bump(self, direction)
+			return moved
+		return false
+	return true
+	
+func _jump(direction: Vector2):
+	moving_to_position = position + direction * (Global.tilemap.tile_set.tile_size.x * 2)
+	moving = true
+	last_direction = direction
+	match(last_direction):
+		Vector2.UP:
+			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+			sprite.animation = "up_jump"
+			sprite.offset = Vector2.ZERO
+		Vector2.DOWN:
+			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+			sprite.animation = "down_jump"
+			sprite.offset = Vector2.ZERO
+		Vector2.LEFT:
+			sprite.scale.x = sprite.scale.x * -sign(sprite.scale.x)
+			sprite.animation = "side_jump"
+			sprite.offset = Vector2.ZERO
+		Vector2.RIGHT:
+			sprite.scale.x = sprite.scale.x * sign(sprite.scale.x)
+			sprite.animation = "side_jump"
+			sprite.offset = Vector2.ZERO
+	await get_tree().create_timer(0.5).timeout
+	var tween = create_tween()
+	tween.set_parallel()
+	tween.tween_property(self, "position", (position + moving_to_position) * 0.5, 0.35 * 0.5)
+	tween.tween_callback(Callable(self, "_movement_complete"))
+	tween.tween_property(sprite, "offset", Vector2(0, -512), 0.35 * 0.5)
+	tween.chain().tween_property(sprite, "offset", Vector2.ZERO, 0.35 * 0.5)
+	tween.tween_property(self, "position", moving_to_position, 0.35 * 0.5)
+	
+	return true

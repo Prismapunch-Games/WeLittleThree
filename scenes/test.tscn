@@ -1,16 +1,56 @@
-[gd_scene load_steps=8 format=4 uid="uid://b470ihvuu7ns0"]
+[gd_scene load_steps=13 format=3 uid="uid://b470ihvuu7ns0"]
 
-[ext_resource type="Script" path="res://code/level_controller.gd" id="1_dch3t"]
-[ext_resource type="Script" path="res://code/tilemap_base.gd" id="2_ag07r"]
 [ext_resource type="Script" path="res://code/cursor.gd" id="2_medxa"]
 [ext_resource type="Texture2D" uid="uid://8fnlnt5lfyhe" path="res://sprites/background/grass_background.png" id="2_ywq75"]
 [ext_resource type="Texture2D" uid="uid://bqlnegsm3e7u2" path="res://sprites/background/box.png" id="3_ib63g"]
-[ext_resource type="TileSet" uid="uid://dludkg3ueiehq" path="res://data/tileset.tres" id="4_4h01j"]
 [ext_resource type="Texture2D" uid="uid://k3pjatmi6qbj" path="res://sprites/test/cursor.png" id="4_sjb67"]
+[ext_resource type="Texture2D" uid="uid://4fuhpp24lol1" path="res://sprites/background/grid.png" id="8_ihfs1"]
+[ext_resource type="Theme" path="res://data/main_theme.tres" id="8_suits"]
+[ext_resource type="Shader" path="res://data/circle_fade.gdshader" id="9_d42q4"]
+[ext_resource type="Script" path="res://code/ui_controller.gd" id="9_wqse7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_srjvf"]
+shader = ExtResource("9_d42q4")
+shader_parameter/circle_size = 1.0
+
+[sub_resource type="Animation" id="Animation_2drqi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_mw5bq"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/circle_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqel0"]
+_data = {
+"RESET": SubResource("Animation_2drqi"),
+"fade_in": SubResource("Animation_mw5bq")
+}
 
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_dch3t")
 metadata/_edit_lock_ = true
 
 [node name="Grass" type="Sprite2D" parent="."]
@@ -25,21 +65,51 @@ texture = ExtResource("3_ib63g")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="Base" type="TileMapLayer" parent="."]
-self_modulate = Color(1, 1, 1, 0.501961)
-position = Vector2(0, 32)
-tile_map_data = PackedByteArray("AAAKAAUAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAGAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAAIAAIAAAAAAAAAAAAJAAIAAAAAAAAAAAAKAAIAAAAAAAAAAAALAAIAAAAAAAAAAAA=")
-tile_set = ExtResource("4_4h01j")
-script = ExtResource("2_ag07r")
-metadata/_edit_lock_ = true
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-position = Vector2(0, 32)
-tile_map_data = PackedByteArray("AAAJAAUAAQAAAAAAAQAFAAYAAQAAAAAAAgAGAAUAAQAAAAAAAwALAAYAAQAAAAAABAAFAAMAAQAAAAAABQAHAAMAAQAAAAAABgAJAAMAAQAAAAAABwAEAAQAAQAAAAAACAA=")
-tile_set = ExtResource("4_4h01j")
-
 [node name="Cursor" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("4_sjb67")
 script = ExtResource("2_medxa")
 metadata/_edit_lock_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("9_wqse7")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("8_suits")
+metadata/_edit_lock_ = true
+
+[node name="Level Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 37.0
+offset_right = 307.0
+offset_bottom = 115.0
+rotation = -0.0872665
+text = "Level Name"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_srjvf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_tqel0")
+}
+autoplay = "fade_in"
+
+[node name="Grid" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(963, 536)
+texture = ExtResource("8_ihfs1")

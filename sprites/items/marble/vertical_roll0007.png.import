@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bco40vfxky7v1"
-path="res://.godot/imported/button_blue.png-fd506fd3c19a1293a79cc0ac4a775411.ctex"
+uid="uid://dxfem3bes8ujo"
+path="res://.godot/imported/vertical_roll0007.png-a1151c02d7261eeb0f5ff5c57acb53d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/items/button_blue.png"
-dest_files=["res://.godot/imported/button_blue.png-fd506fd3c19a1293a79cc0ac4a775411.ctex"]
+source_file="res://sprites/items/marble/vertical_roll0007.png"
+dest_files=["res://.godot/imported/vertical_roll0007.png-a1151c02d7261eeb0f5ff5c57acb53d8.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coiq3mm2i3r5b"
-path="res://.godot/imported/button_yellow.png-f41ef8e48a82e7754aa011d190332b94.ctex"
+uid="uid://benyjsj1hkccd"
+path="res://.godot/imported/horizontal_roll0003.png-fcec6bfa6bad365a5c5e37df04f9bb66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/items/button_yellow.png"
-dest_files=["res://.godot/imported/button_yellow.png-f41ef8e48a82e7754aa011d190332b94.ctex"]
+source_file="res://sprites/items/marble/horizontal_roll0003.png"
+dest_files=["res://.godot/imported/horizontal_roll0003.png-fcec6bfa6bad365a5c5e37df04f9bb66.ctex"]
 
 [params]
 

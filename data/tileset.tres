@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://dludkg3ueiehq"]
+[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://dludkg3ueiehq"]
 
 [ext_resource type="Texture2D" uid="uid://bio3pixyki3dd" path="res://sprites/test/tilemap.png" id="1_1wlt0"]
 [ext_resource type="PackedScene" uid="uid://bfdq5nhnr5hiv" path="res://scenes/prototypes/steppables/blue_button.tscn" id="2_awl58"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bu1xfqvsghyfn" path="res://scenes/prototypes/entities/redford.tscn" id="7_kqmbq"]
 [ext_resource type="PackedScene" uid="uid://cfc84w3cwkhwi" path="res://scenes/prototypes/entities/yeller.tscn" id="8_tjn45"]
 [ext_resource type="PackedScene" uid="uid://be0guw0pdiw8k" path="res://scenes/prototypes/entities/marble.tscn" id="9_yxavi"]
+[ext_resource type="PackedScene" path="res://scenes/prototypes/entities/gorp_gorp.tscn" id="10_742b3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nhar6"]
 texture = ExtResource("1_1wlt0")
@@ -29,6 +30,7 @@ scenes/5/scene = ExtResource("6_0dr7e")
 scenes/6/scene = ExtResource("7_kqmbq")
 scenes/7/scene = ExtResource("8_tjn45")
 scenes/8/scene = ExtResource("9_yxavi")
+scenes/9/scene = ExtResource("10_742b3")
 
 [resource]
 tile_size = Vector2i(128, 128)

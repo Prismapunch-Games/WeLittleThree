@@ -1,13 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfc84w3cwkhwi"]
+[gd_scene load_steps=16 format=3 uid="uid://cfc84w3cwkhwi"]
 
 [ext_resource type="PackedScene" uid="uid://rw8akufak4ur" path="res://scenes/prototypes/entities/base_entity.tscn" id="1_8huom"]
 [ext_resource type="Texture2D" uid="uid://dwsipp5m5412i" path="res://sprites/yellow/front_walk_1.png" id="2_iria4"]
 [ext_resource type="Texture2D" uid="uid://b7np0is53gl2e" path="res://sprites/yellow/front_walk_2.png" id="3_qjswn"]
 [ext_resource type="Texture2D" uid="uid://bjl64s82e37kd" path="res://sprites/yellow/side_walk_1.png" id="4_cjicp"]
+[ext_resource type="Texture2D" uid="uid://dlr1i2m4141vn" path="res://sprites/yellow/front_jump_1.png" id="4_k0xpl"]
 [ext_resource type="Texture2D" uid="uid://crtyyx0tknrtw" path="res://sprites/yellow/side_walk_2.png" id="5_poj1y"]
+[ext_resource type="Texture2D" uid="uid://pu7mex8c22sv" path="res://sprites/yellow/front_jump_2.png" id="5_s2v3r"]
 [ext_resource type="Texture2D" uid="uid://mwagans0ld4v" path="res://sprites/yellow/back_walk_1.png" id="6_phnw0"]
 [ext_resource type="Texture2D" uid="uid://dl6k6xgfjujof" path="res://sprites/yellow/back_walk_2.png" id="7_vffwv"]
 [ext_resource type="Texture2D" uid="uid://bsnl00pfvfxs7" path="res://sprites/yellow/left.png" id="7_xewlt"]
+[ext_resource type="Texture2D" uid="uid://bb8aje6ib80yu" path="res://sprites/yellow/side_jump_1.png" id="8_v36cw"]
+[ext_resource type="Texture2D" uid="uid://qac2yfjhoptw" path="res://sprites/yellow/side_jump_2.png" id="9_16ad3"]
+[ext_resource type="Texture2D" uid="uid://7hy0gu2kpcfg" path="res://sprites/yellow/back_jump_1.png" id="13_pwscd"]
+[ext_resource type="Texture2D" uid="uid://eka0d0m1f5ey" path="res://sprites/yellow/back_jump_2.png" id="14_b541r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l0caf"]
 animations = [{
@@ -20,6 +26,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"down_idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_k0xpl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s2v3r")
+}],
+"loop": false,
+"name": &"down_jump",
 "speed": 2.0
 }, {
 "frames": [{
@@ -42,6 +59,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"side_idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_v36cw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_16ad3")
+}],
+"loop": false,
+"name": &"side_jump",
 "speed": 2.0
 }, {
 "frames": [{
@@ -85,6 +113,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("13_pwscd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_b541r")
+}],
+"loop": false,
+"name": &"up_jump",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("6_phnw0")
 }, {
 "duration": 1.0,
@@ -100,6 +139,5 @@ entity_flags = 3
 
 [node name="Main Sprite" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_l0caf")
-animation = &"spin"
+animation = &"side_jump"
 autoplay = "side_idle"
-frame_progress = 0.945593
