@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbdai7l33703j"]
+
+[ext_resource type="PackedScene" uid="uid://gr2j6v46gkxl" path="res://scenes/audio/oneshot_audio_smack.tscn" id="1_kdw84"]
+[ext_resource type="AudioStream" uid="uid://dt15bsckrx78i" path="res://sound/sfx/ouch_1.ogg" id="2_2kx8j"]
+[ext_resource type="AudioStream" uid="uid://bije82vfkkbjv" path="res://sound/sfx/ouch_2.ogg" id="3_hvgvw"]
+[ext_resource type="AudioStream" uid="uid://bbevlmwwwe6ee" path="res://sound/sfx/ouch_3.ogg" id="4_6semp"]
+[ext_resource type="AudioStream" uid="uid://b7ftyyp4iafo" path="res://sound/sfx/ouch_4.ogg" id="5_x25qo"]
+[ext_resource type="AudioStream" uid="uid://d3gpjy8smy37e" path="res://sound/sfx/ouch_5.ogg" id="6_lsm51"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dr58r"]
+streams_count = 5
+stream_0/stream = ExtResource("2_2kx8j")
+stream_1/stream = ExtResource("3_hvgvw")
+stream_2/stream = ExtResource("4_6semp")
+stream_3/stream = ExtResource("5_x25qo")
+stream_4/stream = ExtResource("6_lsm51")
+
+[node name="Oneshot Audio Ouch" instance=ExtResource("1_kdw84")]
+stream = SubResource("AudioStreamRandomizer_dr58r")
+volume_db = 0.0

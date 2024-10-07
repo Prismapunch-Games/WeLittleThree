@@ -7,12 +7,14 @@ extends Control
 
 func _ready() -> void:
 	start_button.pressed.connect(func():
+		Global.music_holder.play_click()
 		if(Global.doing_something_important):
 			return
 		Global.start_game()
 		mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 		)
 	exit_button.pressed.connect(func():
+		Global.music_holder.play_click()
 		get_tree().quit()
 		)
 	version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version")

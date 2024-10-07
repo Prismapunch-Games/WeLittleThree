@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://gr2j6v46gkxl"]
+
+[ext_resource type="AudioStream" uid="uid://2ggx7t6tentp" path="res://sound/sfx/smack.ogg" id="1_puyex"]
+[ext_resource type="Script" path="res://code/one_shot_audio.gd" id="2_2ya52"]
+
+[node name="Oneshot Audio Smack" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_puyex")
+volume_db = 20.0
+autoplay = true
+bus = &"SFX"
+script = ExtResource("2_2ya52")

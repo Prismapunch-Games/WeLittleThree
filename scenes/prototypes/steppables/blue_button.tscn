@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfdq5nhnr5hiv"]
+[gd_scene load_steps=6 format=3 uid="uid://bfdq5nhnr5hiv"]
 
 [ext_resource type="Script" path="res://code/entity/button.gd" id="1_utv3f"]
 [ext_resource type="Texture2D" uid="uid://bco40vfxky7v1" path="res://sprites/items/blue button/button_blue.png" id="2_yb0qo"]
 [ext_resource type="Texture2D" uid="uid://b3cpy3d7dxgcl" path="res://sprites/items/blue button/button_blue_pressed.png" id="3_atju7"]
+[ext_resource type="AudioStream" uid="uid://clitu1p8g1j43" path="res://sound/sfx/click.ogg" id="4_2khu1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_je65e"]
 animations = [{
@@ -33,3 +34,7 @@ sprite_frames = SubResource("SpriteFrames_je65e")
 animation = &"down"
 autoplay = "default"
 metadata/_edit_lock_ = true
+
+[node name="Click Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_2khu1")
+bus = &"SFX"

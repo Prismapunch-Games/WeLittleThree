@@ -8,6 +8,9 @@ var hovered: bool = false
 @onready var sprite: AnimatedSprite2D = $"Main Sprite"
 @onready var shadow: Sprite2D = $Shadow
 
+@onready var jump_sound: AudioStreamPlayer2D = $jump
+@onready var push_sound: AudioStreamPlayer2D = $push
+
 var last_direction: Vector2
 
 var destroying: bool = false
@@ -77,6 +80,8 @@ func _move(direction: Vector2):
 		if(entity_flags == EntityFlags.FLAG_YELLOW && _can_jump(direction)):
 			_jump(direction)
 		return
+	if(pushing && (pushing_object is Marble)):
+		push_sound.play()
 	last_direction = direction
 	sprite.offset = Vector2.ZERO
 	shadow.offset = Vector2.ZERO
@@ -210,6 +215,7 @@ func _can_jump(direction: Vector2):
 		if(hitting_object is Entity):
 			var moved: bool = hitting_object.bump(self, direction)
 			return moved
+			
 		return false
 	return true
 	
@@ -219,12 +225,13 @@ func _jump(direction: Vector2):
 	last_direction = direction
 	jumping = true
 	await get_tree().create_timer(0.5).timeout
+	jump_sound.play()
 	var tween = create_tween()
 	tween.set_parallel()
 	tween.tween_property(self, "position", (position + moving_to_position) * 0.5, 0.35 * 0.5)
-	tween.tween_callback(Callable(self, "_movement_complete"))
 	tween.tween_property(sprite, "offset", Vector2(0, -512), 0.35 * 0.5)
 	tween.chain().tween_property(sprite, "offset", Vector2.ZERO, 0.35 * 0.5)
 	tween.tween_property(self, "position", moving_to_position, 0.35 * 0.5)
 	await tween.finished
+	_movement_complete()
 	return true

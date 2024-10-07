@@ -11,12 +11,17 @@ var loading_next_level: bool = false
 
 var doing_something_important: bool = false
 
+var one_shot_smack: PackedScene = preload("res://scenes/audio/oneshot_audio_smack.tscn")
+var one_shot_ouch: PackedScene = preload("res://scenes/audio/oneshot_audio_ouch.tscn")
+
 var levels: Array[PackedScene] = [
 	preload("res://scenes/levels/level_1_1.tscn"),
 	preload("res://scenes/levels/level_1_2.tscn"),
 	preload("res://scenes/levels/level_1_3.tscn"),
 	preload("res://scenes/levels/level_1_4.tscn")
 ]
+
+var music_holder: MusicHolder
 
 func _ready():
 	top_level_node = get_node("/root/Main")
@@ -59,6 +64,7 @@ func check_for_completion():
 			continue
 		print("destroying %s" % entity.name)
 		entity.call_deferred("destroy")
+	music_holder.win_sound.play()
 	await get_tree().create_timer(2.0).timeout
 	check_for_level_end()
 		
