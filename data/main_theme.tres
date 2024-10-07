@@ -1,5 +1,23 @@
-[gd_resource type="Theme" format=3 uid="uid://dpa2m684e5spd"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dpa2m684e5spd"]
+
+[ext_resource type="Texture2D" uid="uid://d23s27rig3ic0" path="res://sprites/test/box_button.png" id="1_1tfav"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xvkwv"]
+texture = ExtResource("1_1tfav")
+modulate_color = Color(0.720467, 0.720468, 0.720467, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vhxox"]
+texture = ExtResource("1_1tfav")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f7erw"]
+texture = ExtResource("1_1tfav")
+modulate_color = Color(0.54099, 0.54099, 0.54099, 1)
 
 [resource]
+Button/constants/outline_size = 16
+Button/font_sizes/font_size = 64
+Button/styles/hover = SubResource("StyleBoxTexture_xvkwv")
+Button/styles/normal = SubResource("StyleBoxTexture_vhxox")
+Button/styles/pressed = SubResource("StyleBoxTexture_f7erw")
 Label/constants/outline_size = 16
 Label/font_sizes/font_size = 64

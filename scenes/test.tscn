@@ -1,13 +1,58 @@
-[gd_scene load_steps=13 format=3 uid="uid://b470ihvuu7ns0"]
+[gd_scene load_steps=28 format=3 uid="uid://b470ihvuu7ns0"]
 
 [ext_resource type="Script" path="res://code/cursor.gd" id="2_medxa"]
 [ext_resource type="Texture2D" uid="uid://8fnlnt5lfyhe" path="res://sprites/background/grass_background.png" id="2_ywq75"]
 [ext_resource type="Texture2D" uid="uid://bqlnegsm3e7u2" path="res://sprites/background/box.png" id="3_ib63g"]
 [ext_resource type="Texture2D" uid="uid://k3pjatmi6qbj" path="res://sprites/test/cursor.png" id="4_sjb67"]
+[ext_resource type="PackedScene" uid="uid://rmrbytmrkj7c" path="res://scenes/main_menu.tscn" id="7_xai7q"]
 [ext_resource type="Texture2D" uid="uid://4fuhpp24lol1" path="res://sprites/background/grid.png" id="8_ihfs1"]
-[ext_resource type="Theme" path="res://data/main_theme.tres" id="8_suits"]
+[ext_resource type="Theme" uid="uid://dpa2m684e5spd" path="res://data/main_theme.tres" id="8_suits"]
+[ext_resource type="Texture2D" uid="uid://bmq26p2li40fy" path="res://sprites/blue/dance_1.png" id="9_cie2n"]
 [ext_resource type="Shader" path="res://data/circle_fade.gdshader" id="9_d42q4"]
+[ext_resource type="Script" path="res://code/win_screen.gd" id="9_scuqy"]
 [ext_resource type="Script" path="res://code/ui_controller.gd" id="9_wqse7"]
+[ext_resource type="Texture2D" uid="uid://j3ofw0envl06" path="res://sprites/blue/dance_2.png" id="10_mh88a"]
+[ext_resource type="Texture2D" uid="uid://cicjxyap7jpus" path="res://sprites/blue/dance_3.png" id="11_03fg6"]
+[ext_resource type="Texture2D" uid="uid://mvquusmiaq8d" path="res://sprites/test/shadow.png" id="12_0unqq"]
+[ext_resource type="Texture2D" uid="uid://b6powdntschy2" path="res://sprites/red/dance_1.png" id="13_1gi3l"]
+[ext_resource type="Texture2D" uid="uid://brhk7frgbk03s" path="res://sprites/red/dance_2.png" id="14_uns1u"]
+[ext_resource type="Texture2D" uid="uid://cxm13sa64f5yq" path="res://sprites/red/dance_3.png" id="15_bo1if"]
+[ext_resource type="Texture2D" uid="uid://se04uvrurmhb" path="res://sprites/yellow/dance_1.png" id="16_6b1a2"]
+[ext_resource type="Texture2D" uid="uid://b1l4b28kn1sn4" path="res://sprites/yellow/dance_2.png" id="17_lxnlj"]
+[ext_resource type="Texture2D" uid="uid://cyahl1l868slh" path="res://sprites/yellow/dance_3.png" id="18_yaob0"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_1lhkh"]
+frames = 4
+frame_0/texture = ExtResource("9_cie2n")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("10_mh88a")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("11_03fg6")
+frame_2/duration = 0.2
+frame_3/texture = ExtResource("10_mh88a")
+frame_3/duration = 0.2
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_g3yrf"]
+frames = 4
+frame_0/texture = ExtResource("13_1gi3l")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("14_uns1u")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("15_bo1if")
+frame_2/duration = 0.2
+frame_3/texture = ExtResource("14_uns1u")
+frame_3/duration = 0.2
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_7lcb8"]
+frames = 4
+frame_0/texture = ExtResource("16_6b1a2")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("17_lxnlj")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("18_yaob0")
+frame_2/duration = 0.2
+frame_3/texture = ExtResource("17_lxnlj")
+frame_3/duration = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_srjvf"]
 shader = ExtResource("9_d42q4")
@@ -65,6 +110,11 @@ texture = ExtResource("3_ib63g")
 centered = false
 metadata/_edit_lock_ = true
 
+[node name="Grid" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0.85098, 0.768627)
+texture = ExtResource("8_ihfs1")
+centered = false
+
 [node name="Cursor" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
 texture = ExtResource("4_sjb67")
@@ -94,6 +144,129 @@ offset_bottom = 115.0
 rotation = -0.0872665
 text = "Level Name"
 
+[node name="Main Menu" parent="CanvasLayer" instance=ExtResource("7_xai7q")]
+visible = false
+
+[node name="Win Screen" type="Control" parent="CanvasLayer"]
+visible = false
+texture_filter = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_suits")
+script = ExtResource("9_scuqy")
+
+[node name="Grass" type="TextureRect" parent="CanvasLayer/Win Screen"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_ywq75")
+
+[node name="Box" type="TextureRect" parent="CanvasLayer/Win Screen"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_ib63g")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Win Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="Control" type="Control" parent="CanvasLayer/Win Screen/MarginContainer"]
+layout_mode = 2
+
+[node name="Win Label" type="Label" parent="CanvasLayer/Win Screen/MarginContainer/Control"]
+layout_mode = 0
+offset_left = 581.0
+offset_top = 79.0
+offset_right = 1252.0
+offset_bottom = 234.0
+rotation = 0.0506415
+theme_override_font_sizes/font_size = 128
+text = "YOU WIN!!!!"
+
+[node name="Return Button" type="Button" parent="CanvasLayer/Win Screen/MarginContainer/Control"]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 693.0
+offset_right = 868.0
+offset_bottom = 789.0
+text = "Main Menu"
+
+[node name="Blue" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control"]
+layout_mode = 0
+offset_left = 1151.0
+offset_top = 631.0
+offset_right = 1279.0
+offset_bottom = 759.0
+texture = SubResource("AnimatedTexture_1lhkh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control/Blue"]
+modulate = Color(1, 1, 1, 0.498039)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 22.0
+offset_top = 90.0
+offset_right = 150.0
+offset_bottom = 218.0
+scale = Vector2(0.66, 0.25)
+texture = ExtResource("12_0unqq")
+
+[node name="Red" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control"]
+layout_mode = 0
+offset_left = 1283.0
+offset_top = 386.0
+offset_right = 1411.0
+offset_bottom = 514.0
+texture = SubResource("AnimatedTexture_g3yrf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control/Red"]
+modulate = Color(1, 1, 1, 0.498039)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 22.0
+offset_top = 90.0
+offset_right = 150.0
+offset_bottom = 218.0
+scale = Vector2(0.66, 0.25)
+texture = ExtResource("12_0unqq")
+
+[node name="Yellow" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control"]
+layout_mode = 0
+offset_left = 922.0
+offset_top = 401.0
+offset_right = 1050.0
+offset_bottom = 529.0
+texture = SubResource("AnimatedTexture_7lcb8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Shadow" type="TextureRect" parent="CanvasLayer/Win Screen/MarginContainer/Control/Yellow"]
+modulate = Color(1, 1, 1, 0.498039)
+show_behind_parent = true
+layout_mode = 0
+offset_left = 22.0
+offset_top = 90.0
+offset_right = 150.0
+offset_bottom = 218.0
+scale = Vector2(0.66, 0.25)
+texture = ExtResource("12_0unqq")
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_srjvf")
 anchors_preset = 15
@@ -109,7 +282,3 @@ libraries = {
 "": SubResource("AnimationLibrary_tqel0")
 }
 autoplay = "fade_in"
-
-[node name="Grid" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(963, 536)
-texture = ExtResource("8_ihfs1")

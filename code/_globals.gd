@@ -17,7 +17,6 @@ var levels: Array[PackedScene] = [
 
 func _ready():
 	top_level_node = get_node("/root/Main")
-	call_deferred("load_level", current_level_index)
 	
 func load_level(index: int):
 	var level: PackedScene = levels[index]
@@ -40,7 +39,9 @@ func load_next_level():
 		load_level(current_level_index)
 	else: #you win
 		print("you win")
-		ui_controller.level_label.text = "you win"
+		end_game()
+		loading_next_level = false
+		return
 	ui_controller.fade_animation.play("fade_in")
 	loading_next_level = false
 	
@@ -66,4 +67,26 @@ func check_for_level_end():
 	ui_controller.fade_animation.play_backwards("fade_in")
 	await ui_controller.fade_animation.animation_finished
 	load_next_level()
+	
+func start_game():
+	ui_controller.fade_animation.play_backwards("fade_in")
+	await ui_controller.fade_animation.animation_finished
+	current_level_index = 0
+	load_level(current_level_index)
+	ui_controller.main_menu.hide()
+	ui_controller.fade_animation.play("fade_in")
+	
+func end_game():
+	ui_controller.win_screen.mouse_filter = Control.MOUSE_FILTER_STOP
+	ui_controller.win_screen.show()
+	ui_controller.fade_animation.play("fade_in")
+	
+func restart_game():
+	ui_controller.win_screen.mouse_filter = Control.MOUSE_FILTER_STOP
+	ui_controller.fade_animation.play_backwards("fade_in")
+	await ui_controller.fade_animation.animation_finished
+	ui_controller.win_screen.hide()
+	ui_controller.main_menu.mouse_filter = Control.MOUSE_FILTER_STOP
+	ui_controller.main_menu.show()
+	ui_controller.fade_animation.play("fade_in")
 	

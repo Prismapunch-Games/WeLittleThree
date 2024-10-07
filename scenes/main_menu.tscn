@@ -1,0 +1,109 @@
+[gd_scene load_steps=9 format=3 uid="uid://rmrbytmrkj7c"]
+
+[ext_resource type="Theme" uid="uid://dpa2m684e5spd" path="res://data/main_theme.tres" id="1_uodiv"]
+[ext_resource type="Script" path="res://code/main_menu.gd" id="2_5m3pi"]
+[ext_resource type="Texture2D" uid="uid://8fnlnt5lfyhe" path="res://sprites/background/grass_background.png" id="2_nh15g"]
+[ext_resource type="Texture2D" uid="uid://bqlnegsm3e7u2" path="res://sprites/background/box.png" id="3_ri5cv"]
+[ext_resource type="Texture2D" uid="uid://uowplb6vwxpo" path="res://sprites/logo/logo_1.png" id="4_ya51x"]
+[ext_resource type="Texture2D" uid="uid://boiqokn0onahd" path="res://sprites/logo/logo_2.png" id="5_berjr"]
+[ext_resource type="Texture2D" uid="uid://c5ljeu45w5ac3" path="res://sprites/logo/logo_3.png" id="6_v7qoo"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_vangl"]
+frames = 4
+frame_0/texture = ExtResource("4_ya51x")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("5_berjr")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("6_v7qoo")
+frame_2/duration = 0.2
+frame_3/texture = ExtResource("5_berjr")
+frame_3/duration = 0.2
+
+[node name="Main Menu" type="Control"]
+texture_filter = 4
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uodiv")
+script = ExtResource("2_5m3pi")
+
+[node name="Grass" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_nh15g")
+
+[node name="Box" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_ri5cv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_right = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/Control/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 512)
+layout_mode = 2
+texture = SubResource("AnimatedTexture_vangl")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Button Holder" type="VBoxContainer" parent="MarginContainer/Control/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="MarginContainer/Control/VBoxContainer2/Button Holder"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+focus_mode = 0
+text = "Start"
+
+[node name="Credits" type="Button" parent="MarginContainer/Control/VBoxContainer2/Button Holder"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+focus_mode = 0
+text = "Credits"
+
+[node name="Exit" type="Button" parent="MarginContainer/Control/VBoxContainer2/Button Holder"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+focus_mode = 0
+text = "Exit"
+
+[node name="Version Label" type="Label" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -78.0
+offset_right = 224.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "vX.X"
+vertical_alignment = 2
