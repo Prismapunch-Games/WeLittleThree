@@ -4,5 +4,7 @@ extends Control
 
 func _ready():
 	return_button.pressed.connect(func():
+		if(Global.doing_something_important):
+			return
 		Global.restart_game()
 		)

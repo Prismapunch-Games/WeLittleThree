@@ -9,10 +9,13 @@ var top_level_node: Node2D
 var current_level_index: int = 0
 var loading_next_level: bool = false
 
+var doing_something_important: bool = false
+
 var levels: Array[PackedScene] = [
 	preload("res://scenes/levels/level_1_1.tscn"),
 	preload("res://scenes/levels/level_1_2.tscn"),
-	preload("res://scenes/levels/level_1_3.tscn")
+	preload("res://scenes/levels/level_1_3.tscn"),
+	preload("res://scenes/levels/level_1_4.tscn")
 ]
 
 func _ready():
@@ -69,19 +72,24 @@ func check_for_level_end():
 	load_next_level()
 	
 func start_game():
+	doing_something_important = true
 	ui_controller.fade_animation.play_backwards("fade_in")
 	await ui_controller.fade_animation.animation_finished
 	current_level_index = 0
 	load_level(current_level_index)
 	ui_controller.main_menu.hide()
 	ui_controller.fade_animation.play("fade_in")
+	doing_something_important = false
 	
 func end_game():
+	doing_something_important = true
 	ui_controller.win_screen.mouse_filter = Control.MOUSE_FILTER_STOP
 	ui_controller.win_screen.show()
 	ui_controller.fade_animation.play("fade_in")
+	doing_something_important = false
 	
 func restart_game():
+	doing_something_important = true
 	ui_controller.win_screen.mouse_filter = Control.MOUSE_FILTER_STOP
 	ui_controller.fade_animation.play_backwards("fade_in")
 	await ui_controller.fade_animation.animation_finished
@@ -89,4 +97,5 @@ func restart_game():
 	ui_controller.main_menu.mouse_filter = Control.MOUSE_FILTER_STOP
 	ui_controller.main_menu.show()
 	ui_controller.fade_animation.play("fade_in")
+	doing_something_important = false
 	

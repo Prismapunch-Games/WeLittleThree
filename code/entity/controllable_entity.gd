@@ -73,6 +73,7 @@ func _move(direction: Vector2):
 		pushing = true
 		
 	if(!super(direction)):
+		pushing = false
 		if(entity_flags == EntityFlags.FLAG_YELLOW && _can_jump(direction)):
 			_jump(direction)
 		return
@@ -196,6 +197,8 @@ func destroy():
 		)
 		
 func _can_jump(direction: Vector2):
+	if(jumping):
+		return
 	var next_tile = position + direction * (Global.tilemap.tile_set.tile_size.x * 2)
 	var cell_data = Global.tilemap.get_cell_tile_data(Global.tilemap.local_to_map(next_tile))
 	if(!cell_data):

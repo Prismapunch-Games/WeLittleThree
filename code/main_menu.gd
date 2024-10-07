@@ -7,6 +7,8 @@ extends Control
 
 func _ready() -> void:
 	start_button.pressed.connect(func():
+		if(Global.doing_something_important):
+			return
 		Global.start_game()
 		mouse_filter = MouseFilter.MOUSE_FILTER_IGNORE
 		)
