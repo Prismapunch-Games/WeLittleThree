@@ -18,7 +18,11 @@ var levels: Array[PackedScene] = [
 	preload("res://scenes/levels/level_1_1.tscn"),
 	preload("res://scenes/levels/level_1_2.tscn"),
 	preload("res://scenes/levels/level_1_3.tscn"),
-	preload("res://scenes/levels/level_1_4.tscn")
+	preload("res://scenes/levels/level_1_4.tscn"),
+	preload("res://scenes/levels/level_1_5.tscn"),
+	preload("res://scenes/levels/level_1_6.tscn"),
+	preload("res://scenes/levels/level_1_7.tscn"),
+	preload("res://scenes/levels/level_1_8.tscn")
 ]
 
 var music_holder: MusicHolder
