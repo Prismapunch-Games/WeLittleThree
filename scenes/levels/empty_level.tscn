@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=4 uid="uid://du4nq3o656j2u"]
+[gd_scene load_steps=5 format=4 uid="uid://du4nq3o656j2u"]
 
 [ext_resource type="Script" path="res://code/level.gd" id="1_6lw0f"]
 [ext_resource type="TileSet" uid="uid://dludkg3ueiehq" path="res://data/tileset.tres" id="2_q65o2"]
+[ext_resource type="Texture2D" uid="uid://4fuhpp24lol1" path="res://sprites/background/grid.png" id="2_tmgt6"]
 [ext_resource type="Script" path="res://code/tilemap_base.gd" id="3_ucc88"]
 
 [node name="Empty Level" type="Node2D"]
 script = ExtResource("1_6lw0f")
+
+[node name="Helper Grid" type="Sprite2D" parent="."]
+texture = ExtResource("2_tmgt6")
+centered = false
 
 [node name="Base" type="TileMapLayer" parent="."]
 position = Vector2(0, 32)
