@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://rmrbytmrkj7c"]
+[gd_scene load_steps=11 format=3 uid="uid://rmrbytmrkj7c"]
 
 [ext_resource type="Theme" uid="uid://dpa2m684e5spd" path="res://data/main_theme.tres" id="1_uodiv"]
 [ext_resource type="Script" path="res://code/main_menu.gd" id="2_5m3pi"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://uowplb6vwxpo" path="res://sprites/logo/logo_1.png" id="4_ya51x"]
 [ext_resource type="Texture2D" uid="uid://boiqokn0onahd" path="res://sprites/logo/logo_2.png" id="5_berjr"]
 [ext_resource type="Texture2D" uid="uid://c5ljeu45w5ac3" path="res://sprites/logo/logo_3.png" id="6_v7qoo"]
+[ext_resource type="Script" path="res://code/url_handler.gd" id="8_oy5c4"]
+[ext_resource type="Texture2D" uid="uid://deil5ex4os5p6" path="res://sprites/UI/backarrow.png" id="9_vlh21"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_vangl"]
 frames = 4
@@ -107,3 +109,61 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "vX.X"
 vertical_alignment = 2
+
+[node name="Credits" type="ColorRect" parent="MarginContainer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -384.0
+offset_right = 640.0
+offset_bottom = 384.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.607843)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/Control/Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]
+PRISMAPUNCH GAMES
+Declan Gatenby - ugly_garfield - 2D Art, SFX
+Alex Dimitrijevic - baiomu - Programming
+Alex Hartman - hardtmannn - 3D Art, Space Background
+
+[u]Testers:[/u]
+Lil E, Ynot01, Lazenn, Chubbygummibear, cowbot93, thegoldencat413
+
+[u]Special Thanks:[/u]
+Shammy - Name, Level Design
+
+[u]Assets:[/u]
+[url=https://opengameart.org/content/ambient-bird-sounds CC0]Ambient Bird Sounds[/url] by isaiah658 
+[url=https://godotshaders.com/shader/simple-circle-transition/]Simple Circle Transition[/url] by 01Aether
+[url= https://freesound.org/people/IDLauncher/sounds/513236/]boulder.ogg edited from Boulder Push[/url] by IDLauncher
+[url=https://freesound.org/people/deleted_user_7146007/sounds/383346/]jump.ogg[/url] edited from Boing Cartoon Sound Effect Free High Quality Sound FX 
+[url=https://freesound.org/people/rocketpancake/sounds/582265/]smack.ogg edited from justa slap smack[/url] by rocketpancake
+[url=https://freesound.org/people/Infinita08/sounds/546436/]sewing machine button sounds[/url] edited from SewingMachineButtons2.wav by Infinita08
+[url=https://freesound.org/people/JonnyRuss01/sounds/478196/]click[/url] edited from Click2.wav by JonnyRuss01
+[url=https://freesound.org/people/Fupicat/sounds/521642/]win[/url] edited from WinHarpsichord.wav by Fupicat
+
+[u]Music:[/u]
+[url=https://holokin.synergize.co/music/]overworld[/url] by Ambi"
+script = ExtResource("8_oy5c4")
+
+[node name="Close Credits" type="TextureButton" parent="MarginContainer/Control/Credits"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture_normal = ExtResource("9_vlh21")
+ignore_texture_size = true
+stretch_mode = 5

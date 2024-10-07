@@ -32,7 +32,7 @@ func _ready() -> void:
 	tween = create_tween()
 	tween.tween_property(tutorial_sprite, "modulate", Color(1,1,1,1), 1.0)
 	await tween.finished
-	await get_tree().create_timer(10.0).timeout
+	await get_tree().create_timer(6.0).timeout
 	tween = create_tween()
 	tween.tween_property(tutorial_sprite, "modulate", Color(1,1,1,0), 1.0)
 	await tween.finished
