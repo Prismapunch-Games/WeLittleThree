@@ -157,7 +157,7 @@ Shammy - Name, Level Design
 [url=https://freesound.org/people/Fupicat/sounds/521642/]win[/url] edited from WinHarpsichord.wav by Fupicat
 
 [u]Music:[/u]
-[url=https://holokin.synergize.co/music/]overworld[/url] by Ambi"
+[url=https://holokin.synergize.co/music/]overworld[/url] by Holokin"
 script = ExtResource("8_oy5c4")
 
 [node name="Close Credits" type="TextureButton" parent="MarginContainer/Control/Credits"]
