@@ -15,7 +15,7 @@ var one_shot_smack: PackedScene = preload("res://scenes/audio/oneshot_audio_smac
 var one_shot_ouch: PackedScene = preload("res://scenes/audio/oneshot_audio_ouch.tscn")
 
 var levels: Array[PackedScene] = [
-	preload("res://scenes/levels/level_1_7.tscn"),
+	preload("res://scenes/levels/level_1_1.tscn"),
 	preload("res://scenes/levels/level_1_2.tscn"),
 	preload("res://scenes/levels/level_1_3.tscn"),
 	preload("res://scenes/levels/level_1_4.tscn"),
