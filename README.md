@@ -1,7 +1,7 @@
 ![wl3](https://github.com/user-attachments/assets/e8c243ac-c195-48a2-bdd5-96940429f413)
 
 
-We Little Three is a puzzle game made for [Ludum Dare 56](https://ldjam.com/events/ludum-dare/56/we-little-three). You control three "littles": Red, Blue, and Yellow, each with a different ability. There are 5 levels in the base game, and other levels are easily generated.
+We Little Three is a puzzle game made for [Ludum Dare 56](https://ldjam.com/events/ludum-dare/56/we-little-three). You control three "littles": Red, Blue, and Yellow, each with a different ability. There are 9 levels in the base game, and other levels are easily generated.
 Out of 1929 submissions, overall we scored 227th, which is not a bad score for so little Ludum Dare entries. 
 
 All code, 2D, and 3D art were made exclusively by Prismapunch Games.
